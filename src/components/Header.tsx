@@ -3,13 +3,14 @@ import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Search from "@mui/icons-material/Search";
 import Basket from "@mui/icons-material/ShoppingBasket";
-import { useAppSelector } from "../store/redux-hook";
-import { SelectBasket } from "../store/slice/basket-slice";
+import { useAppDispatch, useAppSelector } from "../store/redux-hook";
+import { addToBasket, SelectBasket } from "../store/slice/basket-slice";
 
 interface Props {}
 
 const Header = (props: Props) => {
   const select = useAppSelector(SelectBasket);
+
   return (
     <>
       <Nav>

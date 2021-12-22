@@ -18,62 +18,22 @@ const Home = (props: Props) => {
           key={"4444"}
         />
         <Product
-          Id="166627"
+          Id="166827"
           image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
           price={89999}
           rating={4}
           title="
         Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
-          key={"4444"}
-        />
-      </RowOne>
-      <RowOne>
-        <Product
-          Id="166627"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green -256GB Apple iPhone 11 Pro, 256GB, Midnight Green -256GB"
-          key={"4444"}
+          key={"6666"}
         />
         <Product
-          Id="166627"
+          Id="144827"
           image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
           price={89999}
           rating={4}
           title="
         Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
-          key={"4444"}
-        />
-        <Product
-          Id="166627"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green - Fully Unlocked  Apple iPhone 11 Pro, 256GB, Midnight Green - Fully Unlocked"
-          key={"4444"}
-        />
-        <Product
-          Id="166627"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green - Fully Unlocked  Apple iPhone 11 Pro, 256GB, Midnight Green - Fully Unlocked"
-          key={"4444"}
-        />
-      </RowOne>
-      <RowOne>
-        <Product
-          Id="166627"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green -256GB Apple iPhone 11 Pro, 256GB, Midnight Green -256GB"
-          key={"4444"}
+          key={"66556"}
         />
       </RowOne>
     </Section>

@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import RatingIcon from "@mui/material/Rating";
 import "./product.css";
+import { useAppDispatch } from "../store/redux-hook";
+import { addToBasket } from "../store/slice/basket-slice";
 interface Props {
   Id: string;
   title: string;
@@ -11,6 +13,19 @@ interface Props {
 }
 
 const Product = ({ Id, title, price, image, rating }: Props) => {
+  const dispatch = useAppDispatch();
+
+  const add = () => {
+    dispatch(
+      addToBasket({
+        id: Id,
+        image,
+        rating,
+        price,
+        title,
+      })
+    );
+  };
   return (
     <div className="product">
       <div className="product_info">
@@ -22,7 +37,7 @@ const Product = ({ Id, title, price, image, rating }: Props) => {
         <RatingIcon size="small" value={rating} />
       </div>
       <img src={image} alt="" />
-      <Button>Add to cart</Button>
+      <Button onClick={add}>Add to cart</Button>
     </div>
     // <Section>
     //   <Container>
