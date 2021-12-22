@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import RatingIcon from "@mui/material/Rating";
-import { useAppDispatch } from "../store/redux-hook";
-import { removeItem } from "../store/slice/basket-slice";
+import { useAppDispatch, useAppSelector } from "../store/redux-hook";
+import { removeItem, SelectBasket } from "../store/slice/basket-slice";
 
 interface Props {
   id: string;
@@ -14,7 +14,6 @@ interface Props {
 
 const CheckoutProduct = ({ image, price, title, rating, id }: Props) => {
   const dispatch = useAppDispatch();
-
   const remove = () => {
     dispatch(
       removeItem({
@@ -22,6 +21,7 @@ const CheckoutProduct = ({ image, price, title, rating, id }: Props) => {
       })
     );
   };
+
   return (
     <Container>
       <Image src={image} alt="image" />

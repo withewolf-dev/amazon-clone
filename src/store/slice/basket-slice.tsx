@@ -11,10 +11,12 @@ interface Item {
 
 interface BasketSlice {
   basket: Item[];
+  total: number;
 }
 
 const initialState: BasketSlice = {
   basket: [],
+  total: 0,
 };
 
 export const BasketSlice = createSlice({
