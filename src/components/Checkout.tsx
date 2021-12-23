@@ -1,8 +1,10 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import styled from "styled-components";
+import ProtectedRoute from "../protected/ProtectedRoute";
 import { useAppSelector } from "../store/redux-hook";
 import { SelectBasket } from "../store/slice/basket-slice";
 import CheckoutProduct from "./CheckoutProduct";
+import Product from "./CheckoutProduct";
 import SubTotal from "./SubTotal";
 
 interface Props {}
@@ -52,4 +54,4 @@ const Image = styled.img`
 const CheckoutLayout = styled.div`
   display: flex;
 `;
-export default Checkout;
+export default ProtectedRoute(Checkout);

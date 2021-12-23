@@ -1,16 +1,38 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "@mui/icons-material/Search";
 import Basket from "@mui/icons-material/ShoppingBasket";
 import { useAppDispatch, useAppSelector } from "../store/redux-hook";
 import { addToBasket, SelectBasket } from "../store/slice/basket-slice";
+import { SelectUser, setUserEmail } from "../store/slice/user-slice";
+import { auth } from "../firebaseinit/firebaseinit";
+import { signOut } from "firebase/auth";
 
 interface Props {}
 
 const Header = (props: Props) => {
   const select = useAppSelector(SelectBasket);
+  const userSelect = useAppSelector(SelectUser);
+  const dispatch = useAppDispatch();
 
+  const setUser = (userEmail: string) => {
+    dispatch(setUserEmail(userEmail));
+  };
+
+  let navigate = useNavigate();
+
+  const Logout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/login");
+        setUser("");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
   return (
     <>
       <Nav>
@@ -27,7 +49,10 @@ const Header = (props: Props) => {
         <LinkSection>
           <LinkStyle to={"/"}>
             <OptionOne>hello</OptionOne>
-            <OptionTwo>sign in</OptionTwo>
+            {userSelect.email === "" && <OptionTwo>sign in</OptionTwo>}
+            {userSelect.email !== "" && (
+              <OptionTwo onClick={Logout}>Logout</OptionTwo>
+            )}
           </LinkStyle>
           <LinkStyle to={"/"}>
             <OptionOne>Returns</OptionOne>

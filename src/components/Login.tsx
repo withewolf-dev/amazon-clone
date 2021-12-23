@@ -1,10 +1,59 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "../firebaseinit/firebaseinit";
+import { useAppDispatch } from "../store/redux-hook";
+import { setUserEmail } from "../store/slice/user-slice";
 import "./login.css";
 interface Props {}
 
 const Login = (props: Props) => {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const dispatch = useAppDispatch();
+
+  let navigate = useNavigate();
+
+  const CreateUser = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user.email!);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
+
+  const Login = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user.email!);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
+
+  const setUser = (userEmail: string) => {
+    dispatch(setUserEmail(userEmail));
+  };
+
   return (
     <Section>
       <Link to={"/"}>
@@ -13,14 +62,26 @@ const Login = (props: Props) => {
       <Container>
         <h4>Sign In</h4>
         <div>
-          <Input type={"email"} />
+          <Input
+            type={"email"}
+            onChange={(e) => {
+              setemail(e.target.value);
+            }}
+            value={email}
+          />
         </div>
         <div>
-          <Input type={"password"} />
+          <Input
+            type={"password"}
+            onChange={(e) => {
+              setpassword(e.target.value);
+            }}
+            value={password}
+          />
         </div>
-        <Button>Sign in</Button>
+        <Button onClick={Login}>Sign in</Button>
         <small style={{ fontSize: "10px" }}> by usig amazon</small>
-        <button>create your amazon account</button>
+        <button onClick={CreateUser}>create your amazon account</button>
       </Container>
     </Section>
   );
