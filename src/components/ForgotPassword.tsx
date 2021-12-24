@@ -1,13 +1,29 @@
+import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "../firebaseinit/firebaseinit";
 
 interface Props {}
 
 const ForgotPassword = (props: Props) => {
   const [email, setemail] = useState("");
 
-  const SentEmail = () => {};
+  const SentEmail = () => {
+    sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000/",
+    })
+      .then(() => {
+        // Password reset email sent!
+        // ..
+        alert("check your inbox for the reset link");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert("email not available ");
+      });
+  };
   return (
     <Section>
       <Link to={"/"}>
@@ -26,7 +42,7 @@ const ForgotPassword = (props: Props) => {
             />
           </div>
 
-          <Button>Confirm Email</Button>
+          <Button onClick={SentEmail}>Confirm Email</Button>
         </Wrap>
       </Container>
     </Section>

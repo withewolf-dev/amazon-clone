@@ -86,7 +86,12 @@ const Login = (props: Props) => {
           on create new acccount
         </small>
         <button onClick={CreateUser}>create your amazon account</button>
-        <span style={{ fontSize: "12px", color: "blue", cursor: "pointer" }}>
+        <span
+          onClick={() => {
+            navigate("/forgot-password");
+          }}
+          style={{ fontSize: "12px", color: "blue", cursor: "pointer" }}
+        >
           Forgot Password?
         </span>
       </Container>

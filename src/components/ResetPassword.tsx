@@ -1,13 +1,32 @@
+import { confirmPasswordReset } from "firebase/auth";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "../firebaseinit/firebaseinit";
 
 interface Props {}
+
+const useQuery = () => {
+  const location = useLocation();
+  return new URLSearchParams(location.search);
+};
 
 const ResetPassword = (props: Props) => {
   const [password, setpassword] = useState("");
 
-  const Sentpassword = () => {};
+  const query = useQuery();
+
+  let navigate = useNavigate();
+
+  const passwordRest = async () => {
+    try {
+      await confirmPasswordReset(auth, query.get("oobCode")!, password);
+      navigate("/login");
+    } catch (error) {
+      alert("password failed to reset");
+      console.log(error);
+    }
+  };
   return (
     <Section>
       <Link to={"/"}>
@@ -15,7 +34,7 @@ const ResetPassword = (props: Props) => {
       </Link>
       <Container>
         <Wrap>
-          <h4>Forgot Password</h4>
+          <h4>Enter New Password</h4>
           <div>
             <Input
               type={"password"}
@@ -26,7 +45,7 @@ const ResetPassword = (props: Props) => {
             />
           </div>
 
-          <Button>Confirm password</Button>
+          <Button onClick={passwordRest}>Confirm password</Button>
         </Wrap>
       </Container>
     </Section>
