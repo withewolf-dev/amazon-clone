@@ -80,8 +80,15 @@ const Login = (props: Props) => {
           />
         </div>
         <Button onClick={Login}>Sign in</Button>
-        <small style={{ fontSize: "10px" }}> by usig amazon</small>
+        <small style={{ fontSize: "12px", width: "230px" }}>
+          already have an account? enter your email and password and then click
+          on sign in. If new to the website enter email and password and click
+          on create new acccount
+        </small>
         <button onClick={CreateUser}>create your amazon account</button>
+        <span style={{ fontSize: "12px", color: "blue", cursor: "pointer" }}>
+          Forgot Password?
+        </span>
       </Container>
     </Section>
   );
@@ -102,7 +109,7 @@ const Container = styled.div`
   justify-content: space-evenly;
   border: 2px solid #dddddd;
   align-items: center;
-  height: 360px;
+  height: 390px;
   width: 350px;
 `;
 

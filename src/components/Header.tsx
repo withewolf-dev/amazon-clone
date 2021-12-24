@@ -8,6 +8,7 @@ import { addToBasket, SelectBasket } from "../store/slice/basket-slice";
 import { SelectUser, setUserEmail } from "../store/slice/user-slice";
 import { auth } from "../firebaseinit/firebaseinit";
 import { signOut } from "firebase/auth";
+import ProtectedRoute from "../protected/ProtectedRoute";
 
 interface Props {}
 
@@ -49,7 +50,15 @@ const Header = (props: Props) => {
         <LinkSection>
           <LinkStyle to={"/"}>
             <OptionOne>hello</OptionOne>
-            {userSelect.email === "" && <OptionTwo>sign in</OptionTwo>}
+            {userSelect.email === "" && (
+              <OptionTwo
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                sign in
+              </OptionTwo>
+            )}
             {userSelect.email !== "" && (
               <OptionTwo onClick={Logout}>Logout</OptionTwo>
             )}
@@ -138,4 +147,4 @@ const LinkSection = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
-export default Header;
+export default ProtectedRoute(Header);

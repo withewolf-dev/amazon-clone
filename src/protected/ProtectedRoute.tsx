@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import React, { ComponentType, ReactElement, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseinit/firebaseinit";
@@ -8,7 +8,7 @@ import { SelectUser, setUserEmail } from "../store/slice/user-slice";
 const ProtectedRoute = (WrappedComponent: ComponentType) => {
   return (props: any) => {
     const [pending, setPending] = useState(true);
-
+    const location = useLocation();
     const dispatch = useAppDispatch();
     const select = useAppSelector(SelectUser);
 
