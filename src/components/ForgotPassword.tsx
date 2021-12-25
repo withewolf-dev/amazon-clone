@@ -11,10 +11,9 @@ const ForgotPassword = (props: Props) => {
 
   const SentEmail = () => {
     sendPasswordResetEmail(auth, email, {
-      url: "http://localhost:3000/",
+      url: "https://clone-pop.web.app/",
     })
       .then(() => {
-        // Password reset email sent!
         // ..
         alert("check your inbox for the reset link");
       })
