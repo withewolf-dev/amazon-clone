@@ -1,17 +1,70 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../store/redux-hook";
 import { SelectBasket } from "../store/slice/basket-slice";
+import axios from "axios";
 
 interface Props {}
 
 const SubTotal = (props: Props) => {
-  const dispatch = useAppDispatch();
   const select = useAppSelector(SelectBasket);
 
   const getTotal = () => {
     return select.basket.reduce((amount, item) => item.price + amount, 0);
   };
+
+  const loadScript = (src: string) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  }, []);
+
+  const displayRazoprPay = async () => {
+    const data = await fetch("http://localhost:1337/razorpay", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: getTotal() }),
+    }).then((t) => t.json());
+
+    console.log(data);
+
+    const options = {
+      key: "rzp_live_nxRkbDUeStVAQw",
+      currency: data.currency,
+      amount: data.amount,
+      name: "Amazone clone ",
+      description: "",
+      image: "https://pngimg.com/uploads/amazon/amazon_PNG25.png",
+      order_id: data.id,
+      handler: function (response: {
+        razorpay_payment_id: string;
+        razorpay_order_id: string;
+      }) {
+        alert("PAYMENT ID ::" + response.razorpay_payment_id);
+        alert("ORDER ID :: " + response.razorpay_order_id);
+      },
+      prefill: {
+        email: "anirudh@gmail.com",
+      },
+    };
+
+    const _window = window as any;
+    const paymentObject = new _window.Razorpay(options);
+    paymentObject.open();
+  };
+
   return (
     <Container>
       <P>
@@ -20,7 +73,7 @@ const SubTotal = (props: Props) => {
       <Input>
         <input type={"checkbox"} /> <P>This order contains a gift card</P>
       </Input>
-      <Button>Proceed to Checkout</Button>
+      <Button onClick={displayRazoprPay}>Proceed to Checkout</Button>
     </Container>
   );
 };

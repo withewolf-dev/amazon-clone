@@ -11,16 +11,16 @@ const Home = (props: Props) => {
         <Product
           Id="166627"
           image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
+          price={1}
           rating={4}
           title="
         Apple iPhone 11 Pro, 256GB, Midnight Green -256GB Apple iPhone 11 Pro, 256GB, Midnight Green -256GB"
           key={"4444"}
         />
         <Product
-          Id="166827"
+          Id="166887"
           image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
+          price={1}
           rating={4}
           title="
         Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
@@ -29,7 +29,7 @@ const Home = (props: Props) => {
         <Product
           Id="144827"
           image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={89999}
+          price={1}
           rating={4}
           title="
         Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
