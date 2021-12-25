@@ -30,9 +30,12 @@ export const BasketSlice = createSlice({
       // remove
       state.basket = state.basket.filter((b) => b.id !== action.payload.id);
     },
+    checkout: (state, action) => {
+      state.basket = [];
+    },
   },
 });
 
-export const { addToBasket, removeItem } = BasketSlice.actions;
+export const { addToBasket, removeItem, checkout } = BasketSlice.actions;
 export const SelectBasket = (state: RootState) => state.Basket;
 export default BasketSlice.reducer;

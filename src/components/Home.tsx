@@ -1,40 +1,83 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import firestore from "../firebaseinit/firebaseinit";
 import Product from "./Product";
 interface Props {}
 
+interface Item {
+  Id: string;
+  title: string;
+  image: string;
+  rating: number;
+  price: number;
+}
 const Home = (props: Props) => {
+  const [FirstRow, setFirstRow] = useState<any>([]);
+  const [SecondRow, setSecondRow] = useState<any>([]);
+  const [ThirdRow, setThirdRow] = useState<any>([]);
+
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  const getItems = async () => {
+    const itemCol = collection(firestore, "Items");
+    const productSnapshot = await getDocs(itemCol);
+    var temp: any[] = [];
+    productSnapshot.docs.map((doc) => {
+      temp.push({ Id: doc.id, ...doc.data() });
+    });
+
+    const firstRow = temp.slice(0, 2);
+    const secondRow = temp.slice(2, 5);
+    const thirdRow = temp.slice(5, 6);
+
+    setFirstRow(firstRow);
+    setSecondRow(secondRow);
+    setThirdRow(thirdRow);
+  };
   return (
     <Section>
       <Banner src="images/banner.png" />
       <RowOne>
-        <Product
-          Id="166627"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={1}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green -256GB Apple iPhone 11 Pro, 256GB, Midnight Green -256GB"
-          key={"4444"}
-        />
-        <Product
-          Id="166887"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={1}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
-          key={"6666"}
-        />
-        <Product
-          Id="144827"
-          image="https://m.media-amazon.com/images/I/81AaNJqE+wS._AC_SY741_.jpg"
-          price={1}
-          rating={4}
-          title="
-        Apple iPhone 11 Pro, 256GB, Midnight Green Apple iPhone 11 Pro, 256GB, Midnight Green"
-          key={"66556"}
-        />
+        {FirstRow &&
+          FirstRow.map((e: Item) => (
+            <Product
+              Id={e.Id}
+              image={e.image}
+              price={e.price}
+              rating={e.rating}
+              title={e.title}
+              key={e.Id}
+            />
+          ))}
+      </RowOne>
+      <RowOne>
+        {SecondRow &&
+          SecondRow.map((e: Item) => (
+            <Product
+              Id={e.Id}
+              image={e.image}
+              price={e.price}
+              rating={e.rating}
+              title={e.title}
+              key={e.Id}
+            />
+          ))}
+      </RowOne>
+      <RowOne>
+        {ThirdRow &&
+          ThirdRow.map((e: Item) => (
+            <Product
+              Id={e.Id}
+              image={e.image}
+              price={e.price}
+              rating={e.rating}
+              title={e.title}
+              key={e.Id}
+            />
+          ))}
       </RowOne>
     </Section>
   );
@@ -57,5 +100,6 @@ const Section = styled.div`
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
+  background-color: rgb(234, 237, 237);
 `;
 export default Home;

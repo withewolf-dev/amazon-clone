@@ -4,6 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseinit/firebaseinit";
 import { useAppDispatch, useAppSelector } from "../store/redux-hook";
 import { SelectUser, setUserEmail } from "../store/slice/user-slice";
+import { LinearProgress } from "@mui/material";
 
 const ProtectedRoute = (WrappedComponent: ComponentType) => {
   return (props: any) => {
@@ -28,7 +29,11 @@ const ProtectedRoute = (WrappedComponent: ComponentType) => {
     };
 
     if (pending) {
-      return <>Loading...</>;
+      return (
+        <>
+          <LinearProgress />
+        </>
+      );
     }
     return select.email === "" ? (
       <Navigate to="/login" />
