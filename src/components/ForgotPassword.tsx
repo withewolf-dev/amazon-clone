@@ -33,6 +33,7 @@ const ForgotPassword = (props: Props) => {
           <h4>Forgot Password</h4>
           <div>
             <Input
+              placeholder="email"
               type={"email"}
               onChange={(e) => {
                 setemail(e.target.value);
@@ -81,6 +82,8 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  padding: 5px 5px;
+`;
 
 export default ForgotPassword;

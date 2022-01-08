@@ -63,6 +63,7 @@ const Login = (props: Props) => {
         <h4>Sign In</h4>
         <div>
           <Input
+            placeholder="email"
             type={"email"}
             onChange={(e) => {
               setemail(e.target.value);
@@ -72,6 +73,7 @@ const Login = (props: Props) => {
         </div>
         <div>
           <Input
+            placeholder="password"
             type={"password"}
             onChange={(e) => {
               setpassword(e.target.value);
@@ -124,5 +126,7 @@ const Button = styled.button`
   width: 230px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  padding: 5px 5px;
+`;
 export default Login;
