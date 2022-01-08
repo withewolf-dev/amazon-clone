@@ -94,7 +94,7 @@ const Login = (props: Props) => {
           }}
           style={{ fontSize: "12px", color: "blue", cursor: "pointer" }}
         >
-          Forgot Password?
+          Forgot Password??
         </span>
       </Container>
     </Section>
