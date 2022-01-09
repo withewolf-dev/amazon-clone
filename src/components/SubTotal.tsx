@@ -109,7 +109,11 @@ const SubTotal = (props: Props) => {
 
       {loading && <CircularProgress color="secondary" />}
 
-      {!loading && <Button onClick={displayRazoprPay}>checkout</Button>}
+      {!loading && (
+        <Button style={{ cursor: "pointer" }} onClick={displayRazoprPay}>
+          checkout
+        </Button>
+      )}
     </Container>
   );
 };

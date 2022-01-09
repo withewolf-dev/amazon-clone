@@ -83,6 +83,7 @@ const Product = ({ Id, title, price, image, rating }: Props) => {
 const Button = styled.button`
   background-color: #f0c14b;
   border: 1px solid;
+  cursor: pointer;
 `;
 // const Price = styled.p`
 //   margin-top: 5px;
