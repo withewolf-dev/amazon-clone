@@ -13,6 +13,7 @@ const useQuery = () => {
 
 const ResetPassword = (props: Props) => {
   const [password, setpassword] = useState("");
+  const [loading, setloading] = useState(false);
 
   const query = useQuery();
 
@@ -37,6 +38,7 @@ const ResetPassword = (props: Props) => {
           <h4>Enter New Password</h4>
           <div>
             <Input
+              placeholder="password"
               type={"password"}
               onChange={(e) => {
                 setpassword(e.target.value);

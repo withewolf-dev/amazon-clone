@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { sendPasswordResetEmail } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,14 +9,19 @@ interface Props {}
 
 const ForgotPassword = (props: Props) => {
   const [email, setemail] = useState("");
+  const [loading, setloading] = useState(false);
 
   const SentEmail = () => {
+    setloading(true);
     sendPasswordResetEmail(auth, email, {
       url: "https://clone-pop.web.app/",
     })
       .then(() => {
         // ..
+
         alert("check your inbox for the reset link");
+        setloading(false);
+        setemail("");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -42,7 +48,8 @@ const ForgotPassword = (props: Props) => {
             />
           </div>
 
-          <Button onClick={SentEmail}>Confirm Email</Button>
+          {!loading && <Button onClick={SentEmail}>Confirm Email</Button>}
+          {loading && <CircularProgress />}
         </Wrap>
       </Container>
     </Section>
