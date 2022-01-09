@@ -31,7 +31,7 @@ export const BasketSlice = createSlice({
       state.basket = state.basket.filter((b) => b.id !== action.payload.id);
     },
     checkout: (state, action) => {
-      state.basket = [];
+      state.basket = action.payload;
     },
   },
 });

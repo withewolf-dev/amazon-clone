@@ -55,7 +55,7 @@ const SubTotal = (props: Props) => {
   const displayRazoprPay = async () => {
     setloading(true);
     const data = await fetch(
-      "http://payment-razorpay-amazon.herokuapp.com/razorpay",
+      "https://payment-razorpay-amazon.herokuapp.com/razorpay",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -86,6 +86,7 @@ const SubTotal = (props: Props) => {
         alert(
           " Your payment is made with ORDER ID :: " + response.razorpay_order_id
         );
+        dispatch(checkout([]));
       },
       prefill: {
         email: `${userSelect.email}`,
